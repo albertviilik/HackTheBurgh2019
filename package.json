@@ -1,0 +1,27 @@
+{
+  "name": "voice-google-speechtotext",
+  "version": "1.0.0",
+  "description": "Google Cloud Speech with Nexmo Demo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nexmo-community/voice-google-speechtotext.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nexmo-community/voice-google-speechtotext/issues"
+  },
+  "homepage": "https://github.com/nexmo-community/voice-google-speechtotext#readme",
+  "dependencies": {
+    "@google-cloud/speech": "^1.1.0",
+    "dotenv": "^4.0.0",
+    "httpdispatcher": "^2.0.1",
+    "nexmo": "^2.2.0",
+    "url": "^0.11.0",
+    "websocket": "^1.0.23"
+  }
+}
