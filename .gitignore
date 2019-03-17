@@ -1,0 +1,8 @@
+node_modules/
+private.key
+google_creds.json
+.env
+example.env
+package-lock.json
+youtube.key.js
+.vscode/

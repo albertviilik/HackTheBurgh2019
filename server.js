@@ -101,7 +101,7 @@ dispatcher.onGet("/ncco", function(req, res) {
     console.log(ncco);
     
     //ncco[1].eventUrl[0] = "http://"+process.env.HOSTNAME+"/input?user=" + params.from;
-    ncco[1].eventUrl[0] = "http://" + "7114083b.eu.ngrok.io" + "/input?user=" + params.from;
+    ncco[1].eventUrl[0] = "http://" + "730b52ea.eu.ngrok.io" + "/input?user=" + params.from;
     console.log(ncco);
     
     res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -120,9 +120,9 @@ dispatcher.onPost("/input", function(req, res) {
     var lang = langs.filter(function(l){
         return l.languageID == params.dtmf;
     });
-    ncco[0].eventUrl[0] = "http://"+ "7114083b.eu.ngrok.io" +"/recording?from=" + getparams.user +"&langCode=" + lang[0].languageCode
+    ncco[0].eventUrl[0] = "http://"+ "730b52ea.eu.ngrok.io" +"/recording?from=" + getparams.user +"&langCode=" + lang[0].languageCode
     ncco[1].text = lang[0].languageName
-    ncco[2].endpoint[0].uri = "ws://"+ "7114083b.eu.ngrok.io" + "/nexmosocket"
+    ncco[2].endpoint[0].uri = "ws://"+ "730b52ea.eu.ngrok.io" + "/nexmosocket"
     ncco[2].endpoint[0].headers.languageCode = lang[0].languageCode
     ncco[2].endpoint[0].headers.user = getparams.user
     res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -140,15 +140,16 @@ dispatcher.onPost("/recording", function(req, res) {
     var getparams = parsedUrl.query;
     var params = JSON.parse(req.body);
     console.log(req.body)
-    var localfile = "C:\\xampp\\htdocs\\Files"+params['conversation_uuid']+".wav"
+    var localfile = __dirname + '/Files/' + params['conversation_uuid']+".wav"
     nexmo.files.save(params['recording_url'], localfile, (err, response) => {
       if(response) {
           console.log('The audio is downloaded successfully!');
-          var response = {text: "http://" + "7114083b.eu.ngrok.io" + "/" + localfile,
+          var response = {text: "http://" + "730b52ea.eu.ngrok.io" + "/" + localfile,
                           languageCode: getparams.langCode,
                           user: getparams.from
                           }
           for (var i = 0; i < clients.length; i++) {
+              console.log(JSON.stringify(response))
               clients[i].send(JSON.stringify(response))
           }
       }
